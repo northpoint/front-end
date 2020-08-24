@@ -39,20 +39,20 @@ stages:
         projectVersion: $(tag)
         cliSources: $(Build.Repository.LocalPath)
         
-- stage: DockerBuildPush
-  displayName: Docker Build & Push stage
-  jobs:  
-  - template: /pipeline-templates/docker-builddeploy-pipeline.yaml@microservicesdemo  # Template reference
-    parameters:
-      tag: $(tag)
-      acrRepo: $(serviceName)
-      dockerfilePath: $(dockerfilePath)
-      buildContext: $(Build.Repository.LocalPath)
+# - stage: DockerBuildPush
+#   displayName: Docker Build & Push stage
+#   jobs:  
+#   - template: /pipeline-templates/docker-builddeploy-pipeline.yaml@microservicesdemo  # Template reference
+#     parameters:
+#       tag: $(tag)
+#       acrRepo: $(serviceName)
+#       dockerfilePath: $(dockerfilePath)
+#       buildContext: $(Build.Repository.LocalPath)
       
-- stage: HelmDeploy
-  displayName: Helm Deploy
-  jobs:
-  - template: /pipeline-templates/helm-deploy-pipeline.yaml@microservicesdemo
-    parameters:
-      serviceName: $(serviceName)
-      image: $(serviceName):$(tag)
+# - stage: HelmDeploy
+#   displayName: Helm Deploy
+#   jobs:
+#   - template: /pipeline-templates/helm-deploy-pipeline.yaml@microservicesdemo
+#     parameters:
+#       serviceName: $(serviceName)
+#       image: $(serviceName):$(tag)
